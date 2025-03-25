@@ -6,18 +6,33 @@ namespace Game.Manager
 {
     public class ManagerTable : MonoBehaviour
     {
-        public static GameStateManager GameStateManager
+        public static ObjectPool ObjectPool
         {
             get
             {
-                if (gameStateManager == null)
+                if (objectPool == null)
                 {
-                    gameStateManager = FindObjectOfType<GameStateManager>(true);
+                    objectPool = FindObjectOfType<ObjectPool>(true);
                 }
 
-                return gameStateManager;
+                return objectPool;
             }
         }
-        private static GameStateManager gameStateManager = null;
+
+        public static FlowManager FlowManager
+        {
+            get
+            {
+                if (flowManager == null)
+                {
+                    flowManager = FindObjectOfType<FlowManager>(true);
+                }
+
+                return flowManager;
+            }
+        }
+
+        private static ObjectPool objectPool = null;
+        private static FlowManager flowManager = null;
     }
 }

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Manager
+namespace Game.Data
 {
-    public class GameStateManager : MonoBehaviour
+    public enum MonsterType
     {
-
+        ZombieMelee
     }
 }
