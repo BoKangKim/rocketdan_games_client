@@ -21,6 +21,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e18284f85d47e604aa7db6b01bfe5f74, type: 2}
     - {fileID: 11400000, guid: 9aec8ec2d2efbc94db70fd002c0d1f0f, type: 2}
     - {fileID: 11400000, guid: ca094d91a952c974880a16b983c361e2, type: 2}
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 2
+  minSpawnInterval: 0.8
+  maxSpawnInterval: 4
   decreaseScale: 0.1

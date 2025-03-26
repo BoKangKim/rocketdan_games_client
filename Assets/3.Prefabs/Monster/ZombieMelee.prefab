@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3302727582423535261}
   m_Layer: 0
   m_Name: ZombieMelee
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ani: {fileID: 7016750400611631704}
   rigid: {fileID: 3302727582423535261}
-  isOnMonster: 0
   leftArm: {fileID: 6851911621866096364}
   rightArm: {fileID: 7928511827763145290}
   body: {fileID: 7969222207150852787}
@@ -91,7 +90,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 27b9505da82a85345b9b8ed3e879ff37, type: 2}
@@ -815,10 +814,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 853909816691012237}
-  - component: {fileID: 5635251387041101097}
+  - component: {fileID: 8756306204733333867}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -838,7 +837,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1174570720321624928}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &5635251387041101097
+--- !u!70 &8756306204733333867
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -847,7 +846,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 9137543165676505650}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 27b9505da82a85345b9b8ed3e879ff37, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -870,6 +869,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.038, y: 0.45}
-  m_Size: {x: 0.5, y: 1}
+  m_Offset: {x: -0.2, y: 0.45}
+  m_Size: {x: 0.6, y: 1}
   m_Direction: 0
