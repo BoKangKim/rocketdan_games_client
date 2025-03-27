@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Data;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,10 @@ namespace Game.Entity
 
         [SerializeField] protected Monster collisionMonster = null;
         public bool CanCollision => collisionMonster == null;
+
+        protected Vector2 extraVelo = Vector2.zero;
+
+        private float force = 1f;
 
         private void OnDisable()
         {
@@ -68,12 +73,11 @@ namespace Game.Entity
         {
             if (collision.transform.tag.Equals("Floor"))
             {
-                rigid.mass = 1;
                 isOnFloor = true;
                 return;
             }
 
-            if (!CanCollision || !isOnFloor)
+            if (!CanCollision)
             {
                 return;
             }
@@ -82,14 +86,34 @@ namespace Game.Entity
 
             if (collisionMonster != null)
             {
-                if (!collisionMonster.IsOnFloor || !isOnFloor || !collisionMonster.CanCollision)
+                if (!collisionMonster.CanCollision)
                 {
                     collisionMonster = null;
                     return;
                 }
 
                 collisionMonster.ForceSet(this);
+                force = 1f;
             }
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.transform.TryGetComponent(out Monster target))
+            {
+                if (transform.position.y + 0.7f <= collision.transform.position.y)
+                {
+                    // rigid.AddForce(Vector2.right * 0.5f, ForceMode2D.Impulse);
+                    rigid.velocity = Vector2.right;
+                }
+            }
+            // if (collision.transform.tag.Equals("Tower"))
+            // {
+            //     if (!isOnFloor)
+            //     {
+            //         rigid.velocity = (Vector2.left + Vector2.down) * 10f;
+            //     }
+            // }
         }
 
         public void ForceSet(Monster monster)
@@ -102,7 +126,6 @@ namespace Game.Entity
             if (collision.transform.tag.Equals("Floor"))
             {
                 isOnFloor = false;
-
             }
         }
 
@@ -113,10 +136,10 @@ namespace Game.Entity
                 return;
             }
 
-            if (!collisionMonster.IsOnFloor)
-            {
-                return;
-            }
+            // if (!collisionMonster.IsOnFloor)
+            // {
+            //     return;
+            // }
 
             float yDistance = Mathf.Abs(collisionMonster.transform.position.y - transform.position.y);
             if (yDistance > 1f)
@@ -128,21 +151,19 @@ namespace Game.Entity
 
             if (collisionMonster.transform.position.x <= transform.position.x)
             {
-                Vector2 climbDir = Vector2.left + Vector2.up;
-                climbDir = climbDir.normalized;
-                rigid.velocity = climbDir * 3f;
+                // Vector2 climbDir = ;
+                // climbDir = climbDir.normalized;
+                // rigid.velocity = climbDir * 3f;
 
+
+                rigid.AddForce((Vector2.left + Vector2.up) * 15f);
 
                 return;
             }
 
             if (!isOnFloor)
             {
-                rigid.mass = 9f;
-                // rigid.AddForce(Vector2.left + Vector2.down, ForceMode2D.Impulse);
-                // collisionMonster.Rigid.AddForce(Vector2.right, ForceMode2D.Impulse);
                 collisionMonster.ResetCollision();
-                collisionMonster.Rigid.velocity = Vector2.left;
                 collisionMonster = null;
             }
         }

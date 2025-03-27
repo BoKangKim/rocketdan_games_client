@@ -30,6 +30,11 @@ namespace Game.Entity
         protected override void Move()
         {
             Climb();
+
+            if (!isOnFloor && collisionMonster == null)
+            {
+                rigid.velocity = Vector2.left * 2f + Vector2.down;
+            }
         }
 
         protected override bool RangeCheck()
