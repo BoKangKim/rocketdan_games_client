@@ -27,6 +27,7 @@ namespace Game.Entity
         protected Vector2 extraVelo = Vector2.zero;
 
         private float force = 1f;
+        private bool isRight = false;
 
         private void OnDisable()
         {
@@ -65,6 +66,12 @@ namespace Game.Entity
             collisionMonster = null;
         }
 
+        public void ForceSet(Monster monster, bool isRight)
+        {
+            this.collisionMonster = monster;
+            this.isRight = isRight;
+        }
+
         protected abstract void Move();
         protected abstract bool RangeCheck();
         protected abstract void Attack();
@@ -86,39 +93,27 @@ namespace Game.Entity
 
             if (collisionMonster != null)
             {
-                if (!collisionMonster.CanCollision)
+                if (!collisionMonster.CanCollision || Mathf.Abs(collisionMonster.transform.position.y - transform.position.y) > 0.3f)
                 {
                     collisionMonster = null;
                     return;
                 }
 
-                collisionMonster.ForceSet(this);
+                isRight = collisionMonster.transform.position.x <= transform.position.x;
+                collisionMonster.ForceSet(this, !isRight);
                 force = 1f;
             }
         }
 
         private void OnCollisionStay2D(Collision2D collision)
         {
-            if (collision.transform.TryGetComponent(out Monster target))
+            if (collision.transform.tag.Equals("Monster"))
             {
                 if (transform.position.y + 0.7f <= collision.transform.position.y)
                 {
-                    // rigid.AddForce(Vector2.right * 0.5f, ForceMode2D.Impulse);
-                    rigid.velocity = Vector2.right;
+                    rigid.velocity = Vector2.right * 1.2f;
                 }
             }
-            // if (collision.transform.tag.Equals("Tower"))
-            // {
-            //     if (!isOnFloor)
-            //     {
-            //         rigid.velocity = (Vector2.left + Vector2.down) * 10f;
-            //     }
-            // }
-        }
-
-        public void ForceSet(Monster monster)
-        {
-            this.collisionMonster = monster;
         }
 
         protected virtual void CollisionExit(Collision2D collision)
@@ -131,15 +126,10 @@ namespace Game.Entity
 
         protected virtual void Climb()
         {
-            if (collisionMonster == null)
+            if (collisionMonster == null || !isRight)
             {
                 return;
             }
-
-            // if (!collisionMonster.IsOnFloor)
-            // {
-            //     return;
-            // }
 
             float yDistance = Mathf.Abs(collisionMonster.transform.position.y - transform.position.y);
             if (yDistance > 1f)
@@ -151,21 +141,12 @@ namespace Game.Entity
 
             if (collisionMonster.transform.position.x <= transform.position.x)
             {
-                // Vector2 climbDir = ;
-                // climbDir = climbDir.normalized;
-                // rigid.velocity = climbDir * 3f;
-
-
-                rigid.AddForce((Vector2.left + Vector2.up) * 15f);
-
+                rigid.AddForce((Vector2.left + Vector2.up) * 20f);
                 return;
             }
 
-            if (!isOnFloor)
-            {
-                collisionMonster.ResetCollision();
-                collisionMonster = null;
-            }
+            collisionMonster.ResetCollision();
+            collisionMonster = null;
         }
     }
 }
