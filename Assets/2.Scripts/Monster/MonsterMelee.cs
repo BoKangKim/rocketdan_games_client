@@ -12,6 +12,25 @@ namespace Game.Entity
         public float Height => col.bounds.size.y;
         public float Width => col.bounds.size.x;
 
+        public override void Init(MonsterDataScriptable data, Transform target, int layer)
+        {
+            base.Init(data, target, layer);
+            Vector3 pos = transform.position;
+            pos.z = -layer;
+            transform.position = pos;
+            int targetLayer = LayerMask.NameToLayer($"Layer_{layer + 1}");
+            SetLayerRecursively(gameObject, targetLayer);
+        }
+
+        void SetLayerRecursively(GameObject obj, int newLayer)
+        {
+            obj.layer = newLayer;
+            foreach (Transform child in obj.transform)
+            {
+                SetLayerRecursively(child.gameObject, newLayer);
+            }
+        }
+
         protected override void Move()
         {
             // 등반도 하나의 움직임 이므로 Move로 묶음

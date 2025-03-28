@@ -16,6 +16,32 @@ namespace Game.Entity
         [SerializeField] private SpriteRenderer leftLeg;
         [SerializeField] private SpriteRenderer rightLeg;
 
+        private int order = 0;
+
+        protected override void OnDisable()
+        {
+            leftArm.sortingOrder -= (order * 10);
+            rightArm.sortingOrder -= (order * 10);
+            body.sortingOrder -= (order * 10);
+            head.sortingOrder -= (order * 10);
+            leftLeg.sortingOrder -= (order * 10);
+            rightLeg.sortingOrder -= (order * 10);
+            base.OnDisable();
+        }
+
+        public override void Init(MonsterDataScriptable data, Transform target, int layer)
+        {
+            base.Init(data, target, layer);
+            this.order = layer;
+
+            leftArm.sortingOrder += (order * 10);
+            rightArm.sortingOrder += (order * 10);
+            body.sortingOrder += (order * 10);
+            head.sortingOrder += (order * 10);
+            leftLeg.sortingOrder += (order * 10);
+            rightLeg.sortingOrder += (order * 10);
+        }
+
         protected override void UpdateModel(MonsterDataScriptable data)
         {
             if (!(data is ZombieDataScriptable))

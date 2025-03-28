@@ -39,7 +39,7 @@ namespace Game.Entity
         protected bool isOnFloor = false;
         protected bool isRight = false;
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             data = null;
             target = null;
@@ -62,7 +62,7 @@ namespace Game.Entity
         protected abstract void UpdateModel(MonsterDataScriptable data);
 
         // 몬스터 데이터 토대로 초기화
-        public virtual void Init(MonsterDataScriptable data, Transform target)
+        public virtual void Init(MonsterDataScriptable data, Transform target, int layer)
         {
             this.data = data;
             this.target = target;
