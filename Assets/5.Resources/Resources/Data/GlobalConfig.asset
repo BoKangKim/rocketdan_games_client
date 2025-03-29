@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GlobalConfig
   m_EditorClassIdentifier: 
   speed: 2
+  maxAngle: 80

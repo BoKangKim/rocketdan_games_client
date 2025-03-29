@@ -15,9 +15,6 @@ namespace Game.Entity
         public override void Init(MonsterDataScriptable data, int layer)
         {
             base.Init(data, layer);
-            Vector3 pos = transform.position;
-            pos.z = -layer;
-            transform.position = pos;
             int targetLayer = LayerMask.NameToLayer($"Layer_{layer + 1}");
             SetLayerRecursively(gameObject, targetLayer);
         }
