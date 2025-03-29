@@ -16,8 +16,6 @@ namespace Game.Entity
         [SerializeField] private SpriteRenderer model;
         [SerializeField] private SpriteRenderer blinkSpr;
 
-        public float Height => model.sprite.bounds.size.y;
-
         private int curIndex = -1;
         public int CurIndex => curIndex;
         private BoxData boxData = null;

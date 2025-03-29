@@ -7,17 +7,18 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using Game.UI;
 
 
 namespace Game.Entity
 {
     public class Hero : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer model;
         [SerializeField] private Transform weaponPivot;
         [SerializeField] private Transform shotPos;
         [SerializeField] private SpriteRenderer weaponModel;
         [SerializeField] private LineRenderer arrageView;
+        [SerializeField] private HPPanel hpView;
 
         private WeaponDataScriptable weaponData;
 
@@ -27,6 +28,10 @@ namespace Game.Entity
         private float time = 0f;
 
         private TweenerCore<Vector3, Vector3, VectorOptions> tweener = null;
+        private TweenerCore<Vector3, Vector3, VectorOptions> MoveDowntweener = null;
+        private Vector2 initialPos = Vector2.zero;
+
+        private int hp = 0;
 
         private void Awake()
         {
@@ -35,10 +40,16 @@ namespace Game.Entity
             mousePos = transform.right;
             mousePos.y = transform.position.y;
 
+            weaponModel.sprite = weaponData.Model;
+
             ManagerTable.InputManager.AddEvent(Data.EventType.PointerDown, OnClick);
             ManagerTable.InputManager.AddEvent(Data.EventType.Drag, OnClick);
 
+            initialPos = transform.position;
             mainCam = Camera.main;
+
+            this.hp = PlayData.PlayerData.HP;
+            hpView.UpdateView(hp, PlayData.PlayerData.HP);
 
             UpdateAngle();
         }
@@ -54,7 +65,7 @@ namespace Game.Entity
             Vector2 dir = (mousePos - (Vector2)shotPos.position).normalized;
             weaponData.Weapon.Excute(weaponData, dir, shotPos.position);
 
-            if (tweener == null)
+            if (tweener == null || MoveDowntweener != null)
             {
                 Vector2 pos = transform.position;
                 pos.x += Vector2.left.x * 0.3f;
@@ -93,6 +104,38 @@ namespace Game.Entity
             arrageView.SetPosition(0, firstPos);
             arrageView.SetPosition(1, shotPos.position);
             arrageView.SetPosition(2, secondPos);
+        }
+
+        public void MoveToLastBox(Vector2 boxPos)
+        {
+            if (tweener != null)
+            {
+                tweener = null;
+            }
+
+            Vector2 targetPos = boxPos;
+            targetPos.y += 1.5f;
+            targetPos.x = initialPos.x;
+
+            MoveDowntweener = transform.DOMove(targetPos, 0.3f).SetEase(Ease.OutBack).SetAutoKill(true).OnComplete(() => { MoveDowntweener = null; });
+        }
+
+        public void Damage(int damage)
+        {
+            hp -= damage;
+
+            if (hp <= 0)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+
+            if (!hpView.gameObject.activeSelf)
+            {
+                hpView.gameObject.SetActive(true);
+            }
+
+            hpView.UpdateView(hp, PlayData.PlayerData.HP);
         }
     }
 }

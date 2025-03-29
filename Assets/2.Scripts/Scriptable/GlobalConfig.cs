@@ -9,6 +9,7 @@ namespace Game.Data
     public class GlobalConfig : SingletonScriptableObject<GlobalConfig>
     {
         [Header("Player Data")]
+        [SerializeField] public int hp;
         [SerializeField] public float speed;
     }
 
@@ -19,6 +20,7 @@ namespace Game.Data
 
         public static class PlayerData
         {
+            public static int HP => globalConfig.hp;
             public static float Speed => globalConfig.speed;
         }
     }

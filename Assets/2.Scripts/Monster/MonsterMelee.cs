@@ -58,6 +58,15 @@ namespace Game.Entity
             {
                 box.Damage(data.AttackPower);
             }
+            else
+            {
+                Hero hero = target.TryGetHero();
+
+                if (hero != null)
+                {
+                    hero.Damage(data.AttackPower);
+                }
+            }
         }
 
         protected override bool RangeCheck()
