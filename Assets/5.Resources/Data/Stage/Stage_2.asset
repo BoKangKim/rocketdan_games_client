@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70198d99bb6868442a82a161498afcdb, type: 3}
   m_Name: Stage_2
   m_EditorClassIdentifier: 
+  id: 2
   index: 2
   appearMonsterTypeList:
   - type: 0

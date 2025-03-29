@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Data;
 using UnityEngine;
 
 namespace Game.Manager
@@ -32,7 +33,21 @@ namespace Game.Manager
             }
         }
 
+        public static DataContainer DataContainer
+        {
+            get
+            {
+                if (dataContainer == null)
+                {
+                    dataContainer = FindObjectOfType<DataContainer>(true);
+                }
+
+                return dataContainer;
+            }
+        }
+
         private static ObjectPool objectPool = null;
         private static FlowManager flowManager = null;
+        private static DataContainer dataContainer = null;
     }
 }

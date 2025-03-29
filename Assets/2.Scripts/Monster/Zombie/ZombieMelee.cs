@@ -29,9 +29,9 @@ namespace Game.Entity
             base.OnDisable();
         }
 
-        public override void Init(MonsterDataScriptable data, Transform target, int layer)
+        public override void Init(MonsterDataScriptable data, int layer)
         {
-            base.Init(data, target, layer);
+            base.Init(data, layer);
             this.order = layer;
 
             leftArm.sortingOrder += (order * 10);

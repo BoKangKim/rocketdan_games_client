@@ -8,4 +8,11 @@ namespace Game.Data
     {
         ZombieMelee
     }
+
+    public enum DataType
+    {
+        Stage,
+        Monster,
+        Box
+    }
 }

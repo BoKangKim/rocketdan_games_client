@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Data;
+using Game.Manager;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -30,8 +31,7 @@ namespace Game.Entity
 
         // 몬스터의 정보
         protected MonsterDataScriptable data = null;
-        // TODO 타워 로직 생기면 바꾸기
-        protected Transform target = null;
+        protected Tower target = null;
 
         protected Monster collisionMonster = null;
 
@@ -62,10 +62,10 @@ namespace Game.Entity
         protected abstract void UpdateModel(MonsterDataScriptable data);
 
         // 몬스터 데이터 토대로 초기화
-        public virtual void Init(MonsterDataScriptable data, Transform target, int layer)
+        public virtual void Init(MonsterDataScriptable data, int layer)
         {
             this.data = data;
-            this.target = target;
+            this.target = ManagerTable.FlowManager.Tower;
             UpdateModel(data);
             rigid.velocity = Vector2.left * 3f;
         }

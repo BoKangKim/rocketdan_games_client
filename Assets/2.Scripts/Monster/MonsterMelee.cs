@@ -12,9 +12,9 @@ namespace Game.Entity
         public float Height => col.bounds.size.y;
         public float Width => col.bounds.size.x;
 
-        public override void Init(MonsterDataScriptable data, Transform target, int layer)
+        public override void Init(MonsterDataScriptable datat, int layer)
         {
-            base.Init(data, target, layer);
+            base.Init(data, layer);
             Vector3 pos = transform.position;
             pos.z = -layer;
             transform.position = pos;
@@ -62,7 +62,7 @@ namespace Game.Entity
 
         protected override bool RangeCheck()
         {
-            float distance = Mathf.Abs(target.position.x - transform.position.x);
+            float distance = Mathf.Abs(target.transform.position.x - transform.position.x);
             return distance <= Width + data.Range;
         }
 

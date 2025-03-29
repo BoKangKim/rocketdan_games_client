@@ -74,7 +74,7 @@ namespace Game.Entity
 
             var monster = ManagerTable.ObjectPool.InstantiateT<Monster>(monsterGroup.Prefab, spawnPos, Quaternion.identity);
 
-            monster.Init(monsterData, tower, rndLayer);
+            monster.Init(monsterData, rndLayer);
         }
 
         public void StartSpawn()

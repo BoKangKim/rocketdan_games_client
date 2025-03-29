@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70198d99bb6868442a82a161498afcdb, type: 3}
   m_Name: Stage_1
   m_EditorClassIdentifier: 
+  id: 1
   index: 1
   appearMonsterTypeList:
   - type: 0
@@ -19,3 +20,6 @@ MonoBehaviour:
     mosterDataList:
     - {fileID: 11400000, guid: 27044e9eefec9e94bb4e25ecf63884eb, type: 2}
     - {fileID: 11400000, guid: e18284f85d47e604aa7db6b01bfe5f74, type: 2}
+  minSpawnInterval: 0
+  maxSpawnInterval: 0
+  decreaseScale: 0

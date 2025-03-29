@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game.Data
 {
     [CreateAssetMenu(fileName = nameof(StageDataScriptable), menuName = "Data/" + nameof(StageDataScriptable))]
-    public class StageDataScriptable : ScriptableObject
+    public class StageDataScriptable : GameDataScriptable
     {
         [Serializable]
         public class MonsterGroup
@@ -25,14 +25,11 @@ namespace Game.Data
             }
         }
 
-        [SerializeField] private int index;
         [SerializeField] private List<MonsterGroup> appearMonsterTypeList;
 
         [SerializeField] public float minSpawnInterval;
         [SerializeField] public float maxSpawnInterval;
         [SerializeField] public float decreaseScale;
-
-        public int Index => index;
 
         public float MinSpawnInterval => minSpawnInterval;
         public float MaxSpawnInterval => maxSpawnInterval;
