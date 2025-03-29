@@ -83,11 +83,13 @@ namespace Game.Entity
             this.isRight = isRight;
         }
 
+
         // 움직임
         protected abstract void Move();
         // 범위 체크 - 거의 비슷할 것으로 예상되지만 혹시 몰라 자식의 구현으로 남겨둠
         protected abstract bool RangeCheck();
         // 공격
         protected abstract void Attack(bool isAttack);
+        protected abstract void OnAttack();
     }
 }

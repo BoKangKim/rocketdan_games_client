@@ -46,11 +46,7 @@ namespace Game.Entity
 
             foreach (var box in useBoxList)
             {
-                float distance = Vector2.SqrMagnitude(box.transform.position - position);
-                if (distance >= arrange)
-                {
-                    continue;
-                }
+                float distance = Vector2.SqrMagnitude((Vector2)box.transform.position - (Vector2)position);
 
                 if (targetBox == null)
                 {
