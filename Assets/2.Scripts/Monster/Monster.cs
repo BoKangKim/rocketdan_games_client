@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using Game.Data;
 using Game.Manager;
 using Game.UI;
+using TMPro;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace Game.Entity
 {
@@ -30,6 +35,7 @@ namespace Game.Entity
         [SerializeField] protected Rigidbody2D rigid;
         [SerializeField] protected HPPanel hpView;
         [SerializeField] protected float hpViewTimer;
+        [SerializeField] protected TextMeshPro damageText;
         public Rigidbody2D Rigid => rigid;
 
         // 몬스터의 정보
@@ -117,6 +123,21 @@ namespace Game.Entity
             }
 
             hpView.UpdateView(hp, data.MaxHP);
+
+            Vector2 spawnPos = transform.position;
+            spawnPos.y += 1f;
+
+            TextMeshPro textInst = ManagerTable.ObjectPool.InstantiateT<TextMeshPro>(damageText.gameObject, spawnPos, Quaternion.identity);
+
+            textInst.transform.position = transform.position;
+            textInst.text = damage.ToString();
+            textInst.gameObject.SetActive(true);
+
+            textInst.transform.DOMove(spawnPos + (Vector2.up * 0.3f), 0.3f).SetAutoKill(true).OnComplete(() =>
+            {
+                damageText.gameObject.SetActive(false);
+                ManagerTable.ObjectPool.DestroyPoolObject(textInst.gameObject);
+            });
         }
 
         protected virtual IEnumerator Timer()

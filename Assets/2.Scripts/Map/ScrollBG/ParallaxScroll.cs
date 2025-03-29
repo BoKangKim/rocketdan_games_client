@@ -59,7 +59,7 @@ namespace Game.Map
 
             if (frontBGCenter.position.x <= -targetXPos)
             {
-                frontBGCenter = ManagerTable.ObjectPool.InstantiateT<Transform>(frontBGPrefab.gameObject, new Vector3(targetXPos, 0.7f, 0f), Quaternion.identity, transform);
+                frontBGCenter = ManagerTable.ObjectPool.InstantiateT<Transform>(frontBGPrefab.gameObject, new Vector3(targetXPos, 0.1f, 0f), Quaternion.identity, transform);
                 frontBGList.Add(frontBGCenter);
             }
 
