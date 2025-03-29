@@ -27,6 +27,7 @@ namespace Game.Entity
         private Color nonVisible = new Color(1f, 1f, 1f, 0f);
         private TweenerCore<Color, Color, ColorOptions> blinkTween = null;
 
+        // 박스 데이터 초기화
         public void Init(BoxData data, int index, Action<TowerBox> onBreakBox = null)
         {
             this.boxData = data;
@@ -54,6 +55,7 @@ namespace Game.Entity
             this.onBreakBox -= onBreakBox;
         }
 
+        // 데미지 입었을 때 처리
         public void Damage(int damage)
         {
             hp -= damage;
@@ -77,6 +79,7 @@ namespace Game.Entity
             blinkTween = Blink(ClearTween);
         }
 
+        // 데미지 입었을 때 반짝거리는 효과
         private TweenerCore<Color, Color, ColorOptions> Blink(Action onComplete = null)
         {
             blinkSpr.DOKill();

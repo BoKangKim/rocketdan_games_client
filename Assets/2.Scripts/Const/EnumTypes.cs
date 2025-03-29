@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Game.Data
 {
+    // Enum 타입 모음
     public enum MonsterType
     {
         ZombieMelee

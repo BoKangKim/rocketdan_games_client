@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Game.Manager
 {
+    // Manager급 스크립트 관리
     public class ManagerTable : MonoBehaviour
     {
         public static ObjectPool ObjectPool

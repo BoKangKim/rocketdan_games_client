@@ -19,6 +19,7 @@ namespace Game.Data
         }
     }
 
+    // Scriptable 오브젝트들을 관리하는 클래스
     public class DataContainer : MonoBehaviour
     {
         [SerializeField] private List<Data> dataList;

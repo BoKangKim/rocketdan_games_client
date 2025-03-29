@@ -19,6 +19,7 @@ namespace Game.Entity
 
         private int order = 0;
 
+        // 레이어 초기화
         protected override void OnDisable()
         {
             leftArm.sortingOrder -= (order * 10);
@@ -31,6 +32,7 @@ namespace Game.Entity
             base.OnDisable();
         }
 
+        // 위치에 따른 레이어 변경
         public override void Init(MonsterDataScriptable data, int layer)
         {
             base.Init(data, layer);
@@ -45,6 +47,7 @@ namespace Game.Entity
             hpPanelCanvas.sortingOrder += (order * 10);
         }
 
+        // 이미지 모델 업데이트
         protected override void UpdateModel(MonsterDataScriptable data)
         {
             if (!(data is ZombieDataScriptable))

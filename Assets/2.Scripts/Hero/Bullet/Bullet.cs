@@ -16,6 +16,7 @@ namespace Game.Entity
         private WaitForSeconds wait = new WaitForSeconds(3f);
         private Coroutine timer = null;
 
+        // 총알의 방향 등 초기화
         public void Init(Vector2 direction, int damage, float speed)
         {
             this.direction = direction;
@@ -42,6 +43,7 @@ namespace Game.Entity
             timer = null;
         }
 
+        // 설정한 방향대로 이동
         private void Update()
         {
             if (!isShot)
@@ -52,7 +54,8 @@ namespace Game.Entity
             transform.Translate(direction * Time.deltaTime * speed);
         }
 
-
+        // 땅에 부딪히거나 몬스터에 부딪히면 사라짐
+        // 몬스터에 부딪히면 데미지
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (isCollision)
