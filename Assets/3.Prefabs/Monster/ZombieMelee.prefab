@@ -78,6 +78,7 @@ MonoBehaviour:
   rigid: {fileID: 3302727582423535261}
   hpView: {fileID: 3523185930880650115}
   hpViewTimer: 2
+  damageText: {fileID: 5008318880245044149, guid: 540cbea70a1fca749b766d062dcf1c88, type: 3}
   col: {fileID: 8756306204733333867}
   leftArm: {fileID: 6851911621866096364}
   rightArm: {fileID: 7928511827763145290}
