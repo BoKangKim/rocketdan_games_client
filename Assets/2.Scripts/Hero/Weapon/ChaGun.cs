@@ -10,6 +10,7 @@ namespace Game.Entity
 {
     public class ChaGun : Weapon
     {
+        // 샷건의 총알 발사 로직
         public override void Excute(WeaponDataScriptable data, Vector2 direction, Vector2 spawnPos)
         {
             for (int i = 0; i < data.BulletCount; i++)

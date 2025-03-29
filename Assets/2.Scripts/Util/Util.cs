@@ -6,6 +6,7 @@ namespace Game.Utils
 {
     public static class Util
     {
+        // 기준 벡터로 부터 angle 만큼 벌어진 벡터 계산
         public static Vector2 GetAngleVector(float angle, Vector2 standardVector)
         {
             float radian = angle * Mathf.Deg2Rad;

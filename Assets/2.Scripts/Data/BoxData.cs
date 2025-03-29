@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Game.Data
 {
+    // Box HP 등 데이터
     public class BoxData
     {
         private BoxDataScriptable boxData = null;

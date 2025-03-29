@@ -13,6 +13,7 @@ namespace Game.Entity
         [SerializeField] private Transform truck;
         private List<TowerBox> useBoxList = null;
 
+        // 현재 가지고 있는 박스로 데이터 초기화
         private void Awake()
         {
             for (int i = 0; i < towerBoxList.Count; i++)
@@ -23,6 +24,7 @@ namespace Game.Entity
             useBoxList = towerBoxList.ToList();
         }
 
+        // 박스가 부서졌을 때 처리
         private void OnBoxBreak(TowerBox box)
         {
             for (int i = box.CurIndex; i < useBoxList.Count; i++)
@@ -57,6 +59,7 @@ namespace Game.Entity
             }
         }
 
+        // 가장 가까운 박스 리턴
         public TowerBox GetClosetBox(Vector3 position, float arrange)
         {
             TowerBox targetBox = null;
@@ -83,6 +86,7 @@ namespace Game.Entity
             return targetBox;
         }
 
+        // 박스 없을 때 Hero를 때려야 하므로 체킹
         public Hero TryGetHero()
         {
             if (useBoxList.Count > 0)

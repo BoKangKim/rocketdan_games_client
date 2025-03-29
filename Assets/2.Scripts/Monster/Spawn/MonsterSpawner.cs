@@ -9,8 +9,7 @@ namespace Game.Entity
     public class MonsterSpawner : MonoBehaviour
     {
         [SerializeField] private Transform[] spawnPosArr;
-        // TODO FLOW 기능 완성 시 FlowManager에서 가져오기
-        [SerializeField] private Transform tower;
+        private Transform tower;
 
         private StageDataScriptable curStageData = null;
         private int stage = 1;
@@ -29,8 +28,11 @@ namespace Game.Entity
 
             intervalTimer = 0f;
             curInterval = curStageData.MaxSpawnInterval;
+
+            tower = ManagerTable.FlowManager.Tower.transform;
         }
 
+        // Interval 마다 몬스터 생성
         private void Update()
         {
             if (!spawn)
@@ -54,6 +56,7 @@ namespace Game.Entity
             }
         }
 
+        // 랜덤한 유닛 생성
         private void RandomSpawn()
         {
             var monsterGroup = curStageData.GetRandomMonsterGroup();

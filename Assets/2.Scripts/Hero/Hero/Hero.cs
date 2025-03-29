@@ -33,6 +33,7 @@ namespace Game.Entity
 
         private int hp = 0;
 
+        // 데이터 초기화
         private void Awake()
         {
             // 일단 총 데이터가 1개밖에 없어서 ID 고정해서 불러오기
@@ -54,6 +55,7 @@ namespace Game.Entity
             UpdateAngle();
         }
 
+        // Weapon 데이터 토대로 총을 쏘는 로직직
         private void Update()
         {
             if (time < weaponData.Interval)
@@ -81,6 +83,7 @@ namespace Game.Entity
             time = 0f;
         }
 
+        // 화면을 터치, 클릭했을 때 해당 좌표 변환
         private void OnClick(PointerEventData eventData)
         {
             mousePos = mainCam.ScreenToWorldPoint(eventData.position);
@@ -91,6 +94,7 @@ namespace Game.Entity
             UpdateAngle();
         }
 
+        // 좌표를 토대로 Hero의 총 각도 및 Indicator 각도 조정
         private void UpdateAngle()
         {
             Vector2 dir = (mousePos - (Vector2)shotPos.position).normalized;
@@ -106,6 +110,7 @@ namespace Game.Entity
             arrageView.SetPosition(2, secondPos);
         }
 
+        // 박스 부서졌을 때 움직임
         public void MoveToLastBox(Vector2 boxPos)
         {
             if (tweener != null)
@@ -120,6 +125,7 @@ namespace Game.Entity
             MoveDowntweener = transform.DOMove(targetPos, 0.3f).SetEase(Ease.OutBack).SetAutoKill(true).OnComplete(() => { MoveDowntweener = null; });
         }
 
+        // 데미지 입었을 때 데이터 처리 및 HP View 업데이트
         public void Damage(int damage)
         {
             hp -= damage;
