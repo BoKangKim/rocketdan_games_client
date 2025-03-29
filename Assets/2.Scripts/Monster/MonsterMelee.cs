@@ -12,7 +12,7 @@ namespace Game.Entity
         public float Height => col.bounds.size.y;
         public float Width => col.bounds.size.x;
 
-        public override void Init(MonsterDataScriptable datat, int layer)
+        public override void Init(MonsterDataScriptable data, int layer)
         {
             base.Init(data, layer);
             Vector3 pos = transform.position;
@@ -51,13 +51,16 @@ namespace Game.Entity
             {
                 ani.SetBool(aniKey.Attack, isAttack);
             }
+        }
 
-            if (!isAttack)
+        protected override void OnAttack()
+        {
+            TowerBox box = target.GetClosetBox(transform.position, Width + data.Range);
+
+            if (box != null)
             {
-                return;
+                box.Damage(data.AttackPower);
             }
-
-            // Logic
         }
 
         protected override bool RangeCheck()

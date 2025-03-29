@@ -83,9 +83,9 @@ namespace Game.Entity
         {
             blinkSpr.DOKill();
             Color color = Color.white;
-            color.a *= (80f / 100f);
+            color.a = (150f / 255f);
             blinkSpr.color = color;
-            return blinkSpr.DOColor(nonVisible, 0.5f).SetEase(Ease.Linear).OnComplete(() => onComplete?.Invoke());
+            return blinkSpr.DOColor(nonVisible, 0.2f).SetEase(Ease.Linear).OnComplete(() => onComplete?.Invoke());
         }
 
         public void Reset()

@@ -15,6 +15,7 @@ namespace Game.Entity
         [SerializeField] private SpriteRenderer head;
         [SerializeField] private SpriteRenderer leftLeg;
         [SerializeField] private SpriteRenderer rightLeg;
+        [SerializeField] private Canvas hpPanelCanvas;
 
         private int order = 0;
 
@@ -26,6 +27,7 @@ namespace Game.Entity
             head.sortingOrder -= (order * 10);
             leftLeg.sortingOrder -= (order * 10);
             rightLeg.sortingOrder -= (order * 10);
+            hpPanelCanvas.sortingOrder += (order * 10);
             base.OnDisable();
         }
 
@@ -40,6 +42,7 @@ namespace Game.Entity
             head.sortingOrder += (order * 10);
             leftLeg.sortingOrder += (order * 10);
             rightLeg.sortingOrder += (order * 10);
+            hpPanelCanvas.sortingOrder += (order * 10);
         }
 
         protected override void UpdateModel(MonsterDataScriptable data)

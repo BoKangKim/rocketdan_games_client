@@ -9,14 +9,12 @@ namespace Game.Data
     {
         [Header("Data")]
         [SerializeField] private int maxHp;
-        [SerializeField] private float speed;
         [SerializeField] private float range;
-        [SerializeField] private float attackPower;
+        [SerializeField] private int attackPower;
 
         public int MaxHP => maxHp;
-        public float Speed => speed;
         public float Range => range;
-        public float AttackPower => attackPower;
+        public int AttackPower => attackPower;
     }
 }
 

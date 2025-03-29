@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Stage_2
   m_EditorClassIdentifier: 
   id: 2
-  index: 2
   appearMonsterTypeList:
   - type: 0
     originPrefab: {fileID: 319310827380095937, guid: e48e7c461a85c463cba5a999afb91a67, type: 3}
@@ -23,5 +22,5 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9aec8ec2d2efbc94db70fd002c0d1f0f, type: 2}
     - {fileID: 11400000, guid: ca094d91a952c974880a16b983c361e2, type: 2}
   minSpawnInterval: 0.8
-  maxSpawnInterval: 4
+  maxSpawnInterval: 2
   decreaseScale: 0.1
