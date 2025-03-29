@@ -10,8 +10,10 @@ namespace Game.Entity
     {
         [SerializeField] private Transform[] spawnPosArr;
         // TODO FLOW 기능 완성 시 FlowManager에서 가져오기
-        [SerializeField] private StageDataScriptable curStageData;
         [SerializeField] private Transform tower;
+
+        private StageDataScriptable curStageData = null;
+        private int stage = 1;
 
         private Camera mainCam = null;
         private bool spawn = true;
@@ -20,15 +22,13 @@ namespace Game.Entity
 
         private int count = 0;
 
-        private void Awake()
-        {
-            intervalTimer = 0f;
-            curInterval = curStageData.MaxSpawnInterval;
-        }
-
         private void Start()
         {
             mainCam = Camera.main;
+            curStageData = ManagerTable.DataContainer.GetData<StageDataScriptable>(DataType.Stage, stage);
+
+            intervalTimer = 0f;
+            curInterval = curStageData.MaxSpawnInterval;
         }
 
         private void Update()
@@ -75,6 +75,23 @@ namespace Game.Entity
             var monster = ManagerTable.ObjectPool.InstantiateT<Monster>(monsterGroup.Prefab, spawnPos, Quaternion.identity);
 
             monster.Init(monsterData, rndLayer);
+        }
+
+        public void NextStage()
+        {
+            stage++;
+            StageDataScriptable stageData = ManagerTable.DataContainer.GetData<StageDataScriptable>(DataType.Stage, stage);
+
+            if (stageData == null)
+            {
+                stage--;
+            }
+            else
+            {
+                curStageData = stageData;
+            }
+
+            StartSpawn();
         }
 
         public void StartSpawn()

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.Data;
 using Game.Manager;
+using Game.UI;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -27,6 +28,8 @@ namespace Game.Entity
         [SerializeField] protected Animator ani;
         [SerializeField] protected AnimationKey aniKey;
         [SerializeField] protected Rigidbody2D rigid;
+        [SerializeField] protected HPPanel hpView;
+        [SerializeField] protected float hpViewTimer;
         public Rigidbody2D Rigid => rigid;
 
         // 몬스터의 정보
@@ -39,10 +42,22 @@ namespace Game.Entity
         protected bool isOnFloor = false;
         protected bool isRight = false;
 
+        protected int hp = 0;
+        public int HP => hp;
+
+        private float time = 0f;
+        private Coroutine timerCor = null;
+
+        protected virtual void Awake()
+        {
+            hpView.gameObject.SetActive(false);
+        }
+
         protected virtual void OnDisable()
         {
             data = null;
             target = null;
+            hpView.gameObject.SetActive(false);
         }
 
         protected virtual void Update()
@@ -68,6 +83,57 @@ namespace Game.Entity
             this.target = ManagerTable.FlowManager.Tower;
             UpdateModel(data);
             rigid.velocity = Vector2.left * 3f;
+
+            this.hp = data.MaxHP;
+            hpView.UpdateView(hp, data.MaxHP);
+        }
+
+        public virtual void Damage(int damage)
+        {
+            hp -= damage;
+
+            if (hp <= 0)
+            {
+                ani.SetBool(aniKey.Move, false);
+                ani.SetBool(aniKey.Attack, false);
+                ani.SetBool(aniKey.Dead, true);
+
+                ManagerTable.ObjectPool.DestroyPoolObject(gameObject);
+                return;
+            }
+
+            time = 0f;
+
+            if (!hpView.gameObject.activeSelf)
+            {
+                hpView.gameObject.SetActive(true);
+                if (timerCor == null)
+                {
+                    timerCor = StartCoroutine(Timer());
+                }
+            }
+
+            hpView.UpdateView(hp, data.MaxHP);
+        }
+
+        protected virtual IEnumerator Timer()
+        {
+            while (true)
+            {
+                if (time < hpViewTimer)
+                {
+                    time += Time.deltaTime;
+                }
+                else
+                {
+                    break;
+                }
+                yield return null;
+            }
+
+            hpView.gameObject.SetActive(false);
+            timerCor = null;
+            yield break;
         }
 
         // 한 쪽에서 세팅을 했기 때문에 리셋도 한 쪽에서 모두 함
@@ -82,7 +148,6 @@ namespace Game.Entity
             this.collisionMonster = monster;
             this.isRight = isRight;
         }
-
 
         // 움직임
         protected abstract void Move();

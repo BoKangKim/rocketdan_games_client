@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10004
   maxHp: 70
-  speed: 3
   range: 1
-  attackPower: 14
+  attackPower: 7
   leftArm: {fileID: 21300000, guid: d1121b0c365d84dd7bba6f767db89c26, type: 3}
   rightArm: {fileID: 21300000, guid: 139ba3281dde0439185e445bd0fa9b9d, type: 3}
   body: {fileID: 21300000, guid: 9f5575392b0034fee970201b78c8807d, type: 3}
