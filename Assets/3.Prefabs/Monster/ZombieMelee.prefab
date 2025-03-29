@@ -77,7 +77,7 @@ MonoBehaviour:
     dead: IsDead
   rigid: {fileID: 3302727582423535261}
   hpView: {fileID: 3523185930880650115}
-  hpViewTimer: 0
+  hpViewTimer: 2
   col: {fileID: 8756306204733333867}
   leftArm: {fileID: 6851911621866096364}
   rightArm: {fileID: 7928511827763145290}

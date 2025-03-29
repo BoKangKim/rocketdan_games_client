@@ -57,6 +57,9 @@ namespace Game.Entity
         {
             data = null;
             target = null;
+            collisionMonster = null;
+            isOnFloor = false;
+            isRight = false;
             hpView.gameObject.SetActive(false);
         }
 

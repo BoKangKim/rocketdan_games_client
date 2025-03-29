@@ -9,6 +9,8 @@ namespace Game.Entity
     public class Tower : MonoBehaviour
     {
         [SerializeField] private List<TowerBox> towerBoxList;
+        [SerializeField] private Hero hero;
+        [SerializeField] private Transform truck;
         private List<TowerBox> useBoxList = null;
 
         private void Awake()
@@ -33,10 +35,26 @@ namespace Game.Entity
                 useBoxList[i].SetIndex(i - 1);
                 useBoxList[i].DOKill();
                 int index = i;
-                useBoxList[i].transform.DOMove(useBoxList[index - 1].transform.position, 0.6f).SetEase(Ease.OutBack);
+                if (i == useBoxList.Count - 1)
+                {
+                    int lastIndex = i;
+                    TowerBox target = useBoxList[lastIndex];
+                    useBoxList[i].transform.DOMove(useBoxList[index - 1].transform.position, 0.6f).SetEase(Ease.OutBack).OnUpdate(() =>
+                    {
+                        hero.MoveToLastBox(target.transform.position);
+                    });
+                }
+                else
+                {
+                    useBoxList[i].transform.DOMove(useBoxList[index - 1].transform.position, 0.6f).SetEase(Ease.OutBack);
+                }
             }
 
             useBoxList.Remove(box);
+            if (useBoxList.Count == 0)
+            {
+                hero.MoveToLastBox(truck.position);
+            }
         }
 
         public TowerBox GetClosetBox(Vector3 position, float arrange)
@@ -63,6 +81,16 @@ namespace Game.Entity
             }
 
             return targetBox;
+        }
+
+        public Hero TryGetHero()
+        {
+            if (useBoxList.Count > 0)
+            {
+                return null;
+            }
+
+            return hero;
         }
     }
 }

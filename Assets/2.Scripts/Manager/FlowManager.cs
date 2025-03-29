@@ -8,7 +8,6 @@ namespace Game.Manager
 {
     public class FlowManager : MonoBehaviour
     {
-        [SerializeField] private List<StageDataScriptable> stageDataList;
         [SerializeField] private Tower tower;
         public Tower Tower => tower;
 

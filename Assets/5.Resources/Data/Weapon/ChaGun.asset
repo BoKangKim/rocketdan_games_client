@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd874a93219f06b43a8b492505657ac8, type: 3}
+  m_Name: ChaGun
+  m_EditorClassIdentifier: 
+  id: 1001
+  weapon: {fileID: -4438566948993943950, guid: 30b39a95b5a7018499ec3057bb3fb033, type: 3}
+  model: {fileID: 21300000, guid: e3b4f77454d9f4ef4abc17ed6234f18d, type: 3}
+  interval: 1
+  damage: 10
+  bulletObject: {fileID: 1101822265531424571, guid: 1d6b3b98e8af6e343a7575858d6a05bf, type: 3}
+  bulletCount: 6

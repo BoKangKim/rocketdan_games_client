@@ -15,9 +15,6 @@ namespace Game.Entity
         public override void Init(MonsterDataScriptable data, int layer)
         {
             base.Init(data, layer);
-            Vector3 pos = transform.position;
-            pos.z = -layer;
-            transform.position = pos;
             int targetLayer = LayerMask.NameToLayer($"Layer_{layer + 1}");
             SetLayerRecursively(gameObject, targetLayer);
         }
@@ -60,6 +57,15 @@ namespace Game.Entity
             if (box != null)
             {
                 box.Damage(data.AttackPower);
+            }
+            else
+            {
+                Hero hero = target.TryGetHero();
+
+                if (hero != null)
+                {
+                    hero.Damage(data.AttackPower);
+                }
             }
         }
 

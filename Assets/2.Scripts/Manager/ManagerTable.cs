@@ -46,8 +46,22 @@ namespace Game.Manager
             }
         }
 
+        public static InputManager InputManager
+        {
+            get
+            {
+                if (inputManager == null)
+                {
+                    inputManager = FindObjectOfType<InputManager>(true);
+                }
+
+                return inputManager;
+            }
+        }
+
         private static ObjectPool objectPool = null;
         private static FlowManager flowManager = null;
         private static DataContainer dataContainer = null;
+        private static InputManager inputManager = null;
     }
 }

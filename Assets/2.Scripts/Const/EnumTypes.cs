@@ -13,6 +13,14 @@ namespace Game.Data
     {
         Stage,
         Monster,
-        Box
+        Box,
+        Weapon
+    }
+
+    public enum EventType
+    {
+        PointerDown,
+        PointerUp,
+        Drag
     }
 }
