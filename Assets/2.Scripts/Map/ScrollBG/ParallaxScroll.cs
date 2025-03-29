@@ -23,6 +23,7 @@ namespace Game.Map
 
         private void Awake()
         {
+            // Pool Object로 등록하기 위해 초기화 해두는 것이 아닌 시작하자마자 생성으로 변경
             backBGCenter = ManagerTable.ObjectPool.InstantiateT<Transform>(backBGPrefab.gameObject, new Vector3(0f, 0.7f, 0f), Quaternion.identity, transform);
             frontBGCenter = ManagerTable.ObjectPool.InstantiateT<Transform>(frontBGPrefab.gameObject, new Vector3(0f, 0.1f, 0f), Quaternion.identity, transform);
 
@@ -37,6 +38,7 @@ namespace Game.Map
                 return;
             }
 
+            // 왼쪽으로 움직이기
             foreach (var backBG in backBGList)
             {
                 Vector2 backPos = backBG.position;
@@ -51,6 +53,7 @@ namespace Game.Map
                 frontBG.transform.position = frontPos; ;
             }
 
+            // 일정 포지션 지나면 오른쪽에 새로 생성
             if (backBGCenter.position.x <= -targetXPos)
             {
                 backBGCenter = ManagerTable.ObjectPool.InstantiateT<Transform>(backBGPrefab.gameObject, new Vector3(targetXPos, 0.7f, 0f), Quaternion.identity, transform);
@@ -63,6 +66,7 @@ namespace Game.Map
                 frontBGList.Add(frontBGCenter);
             }
 
+            // 화면에 안보일 정도가 되면 삭제 해줌
             if (backBGList[0].position.x <= -targetXPos * 2f)
             {
                 Transform left = backBGList[0];

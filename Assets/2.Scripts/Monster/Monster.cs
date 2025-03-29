@@ -122,6 +122,7 @@ namespace Game.Entity
                 }
             }
 
+            // View Update
             hpView.UpdateView(hp, data.MaxHP);
 
             Vector2 spawnPos = transform.position;
