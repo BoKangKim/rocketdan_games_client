@@ -12,5 +12,9 @@ namespace Game.Manager
         [SerializeField] private Tower tower;
         public Tower Tower => tower;
 
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
     }
 }
