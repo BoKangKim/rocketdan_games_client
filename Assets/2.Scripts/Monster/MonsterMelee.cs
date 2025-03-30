@@ -150,7 +150,7 @@ namespace Game.Entity
             // 왼쪽위로 힘을 계속줘서 비비면서 올라감 -> 등반하는 느낌
             if (collisionMonster.transform.position.x <= transform.position.x)
             {
-                rigid.AddForce((Vector2.left + Vector2.up) * 20f);
+                rigid.AddForce((Vector2.left + Vector2.up) * 70f);
                 return;
             }
 
